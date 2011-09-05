@@ -15,8 +15,18 @@ if !exists("jslint_command")
   let jslint_command = 'jsl'
 endif
 
+if !exists("jslint_config_file")
+  let jslint_config_file = expand(".jslrc")
+  if !filereadable(jslint_config_file)
+    let jslint_config_file = expand("~/.jslrc")
+  endif
+endif
+
 if !exists("jslint_command_options")
-  let jslint_command_options = '-nofilelisting -nocontext -nosummary -nologo -process'
+  let jslint_command_options = '--nofilelisting --nosummary --nologo'
+  if filereadable(jslint_config_file)
+    let jslint_command_options = g:jslint_command_options . " --conf " . g:jslint_config_file
+  endif
 endif
 
 if !exists("jslint_highlight_color")
