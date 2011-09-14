@@ -18,7 +18,19 @@ endif
 if !exists("jslint_config_file")
   let jslint_config_file = expand(".jslrc")
   if !filereadable(jslint_config_file)
-    let jslint_config_file = expand("~/.jslrc")
+    let jslint_config_file = expand("jsl.conf")
+    if !filereadable(jslint_config_file)
+      let jslint_config_file = expand("~/.jslrc")
+      if !filereadable(jslint_config_file)
+        let jslint_config_file = expand("~/jsl.conf")
+        if !filereadable(jslint_config_file)
+          let jslint_config_file = expand("~/.jsl.conf")
+          if !filereadable(jslint_config_file)
+            let jslint_config_file = expand("/etc/jsl.conf")
+          endif
+        endif
+      endif
+    endif
   endif
 endif
 
