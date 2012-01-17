@@ -39,6 +39,7 @@ if !exists("jslint_command_options")
   if filereadable(jslint_config_file)
     let jslint_command_options = g:jslint_command_options . " --conf " . g:jslint_config_file
   endif
+  let jslint_command_options = g:jslint_command_options . " -process"
 endif
 
 if !exists("jslint_highlight_color")
